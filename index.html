@@ -7,40 +7,53 @@
   <meta name="description" content="Placeholder logistics website template with air, ocean, customs, warehousing and road freight sections.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
   <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- Preloader: counts 00 → 100, removed by JS (hidden by CSS when JS is off) -->
+  <!-- Preloader: counts 00 → 100 over a dotted map, removed by JS -->
   <div class="preloader" aria-hidden="true">
+    <div class="preloader__map"></div>
     <span class="preloader__count" data-preloader-count>00</span>
-    <span class="preloader__label">Loading routes</span>
+    <span class="preloader__label">Plotting routes</span>
   </div>
 
-  <!-- ========== HEADER ========== -->
+  <!-- ========== HEADER: news ticker + nav ========== -->
   <header class="site-header" data-header>
+    <div class="ticker" aria-label="Latest updates">
+      <div class="ticker__track">
+        <span><b>Update:</b> Placeholder headline about port congestion and what it means for your bookings</span>
+        <span><b>Update:</b> Placeholder headline about new weekly sailings on a key trade lane</span>
+        <span><b>Update:</b> Placeholder headline announcing a company milestone</span>
+        <span aria-hidden="true"><b>Update:</b> Placeholder headline about port congestion and what it means for your bookings</span>
+        <span aria-hidden="true"><b>Update:</b> Placeholder headline about new weekly sailings on a key trade lane</span>
+        <span aria-hidden="true"><b>Update:</b> Placeholder headline announcing a company milestone</span>
+      </div>
+    </div>
+
     <div class="container site-header__inner">
       <a href="#top" class="logo" aria-label="Northwind Freight home">
         <span class="logo__mark" aria-hidden="true"></span>
-        <span class="logo__text">Northwind<span>Freight</span></span>
+        <span class="logo__text">Northwind<b>Freight</b></span>
       </a>
 
       <nav class="nav" id="primary-nav" aria-label="Primary" data-nav>
         <ul class="nav__list">
           <li><a href="#about">About</a></li>
           <li><a href="#services">Services</a></li>
-          <li><a href="#why-us">Why us</a></li>
+          <li><a href="#why-us">Industries</a></li>
           <li><a href="#insights">Insights</a></li>
-          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#faq">Careers</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
-        <div class="nav__actions">
-          <a href="#contact" class="link-arrow">Track a shipment</a>
-          <a href="#contact" class="btn btn--accent">Work with us</a>
-        </div>
+        <ul class="nav__utility">
+          <li><a href="#contact">Emissions calculator</a></li>
+          <li><a href="#contact">Live tracking portal</a></li>
+        </ul>
+        <a href="#contact" class="btn btn--light nav__cta">Work with us</a>
       </nav>
 
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" data-nav-toggle>
@@ -52,70 +65,126 @@
   </header>
 
   <main id="main">
-    <!-- ========== HERO ========== -->
+    <!-- ========== HERO (dark, starfield, globe) ========== -->
     <section class="hero" id="top">
-      <div class="hero__glow" aria-hidden="true"></div>
+      <div class="stars" aria-hidden="true"></div>
       <div class="container hero__grid">
         <div class="hero__copy">
-          <p class="eyebrow reveal">Freight, simplified</p>
-          <h1 class="hero__title reveal">Cargo in motion,<br><em>on your terms.</em></h1>
-          <p class="hero__lead reveal">Plan, ship and clear goods across air, sea and road with a crew that answers the phone and knows your account by name.</p>
+          <p class="label reveal">Door to door</p>
+          <h1 class="hero__title reveal">Freight that keeps its word.</h1>
+          <p class="hero__lead reveal">Placeholder intro: one or two lines on what you move, where, and why shippers pick you.</p>
           <div class="hero__ctas reveal">
-            <a href="#contact" class="btn btn--accent">Get in touch</a>
-            <a href="#services" class="btn btn--ghost">See what we do</a>
+            <a href="#contact" class="btn btn--light">Talk to us</a>
+            <a href="#services" class="btn btn--outline">Our services</a>
           </div>
         </div>
 
-        <!-- Stylised route map: pure SVG, original artwork -->
-        <div class="hero__map reveal" aria-hidden="true">
-          <svg viewBox="0 0 520 420" class="route-map">
+        <!-- Globe: original SVG artwork -->
+        <div class="hero__globe reveal" aria-hidden="true">
+          <svg viewBox="0 0 500 500" class="globe">
             <defs>
-              <pattern id="dots" width="14" height="14" patternUnits="userSpaceOnUse">
-                <circle cx="2" cy="2" r="1.4" fill="currentColor" opacity=".18"/>
-              </pattern>
+              <radialGradient id="globeFill" cx="40%" cy="35%" r="70%">
+                <stop offset="0%" stop-color="#2a3b66"/>
+                <stop offset="55%" stop-color="#0d1530"/>
+                <stop offset="100%" stop-color="#05070f"/>
+              </radialGradient>
+              <radialGradient id="globeGlow" cx="50%" cy="50%" r="50%">
+                <stop offset="60%" stop-color="#1e90ff" stop-opacity=".0"/>
+                <stop offset="78%" stop-color="#1e90ff" stop-opacity=".35"/>
+                <stop offset="100%" stop-color="#ff6b00" stop-opacity="0"/>
+              </radialGradient>
+              <clipPath id="globeClip"><circle cx="250" cy="250" r="180"/></clipPath>
             </defs>
-            <rect width="520" height="420" rx="28" fill="url(#dots)"/>
-            <path class="route" d="M80 300 C 160 140, 280 120, 400 90"/>
-            <path class="route route--2" d="M80 300 C 200 320, 300 260, 440 300"/>
-            <path class="route route--3" d="M400 90 C 430 160, 450 220, 440 300"/>
-            <g class="hub"><circle cx="80" cy="300" r="7"/><circle cx="80" cy="300" r="16" class="hub__pulse"/></g>
-            <g class="hub"><circle cx="400" cy="90" r="7"/><circle cx="400" cy="90" r="16" class="hub__pulse"/></g>
-            <g class="hub"><circle cx="440" cy="300" r="7"/><circle cx="440" cy="300" r="16" class="hub__pulse"/></g>
-            <circle r="5" class="parcel"><animateMotion dur="6s" repeatCount="indefinite" path="M80 300 C 160 140, 280 120, 400 90"/></circle>
-            <circle r="5" class="parcel parcel--2"><animateMotion dur="7s" repeatCount="indefinite" path="M80 300 C 200 320, 300 260, 440 300"/></circle>
+            <circle cx="250" cy="250" r="240" fill="url(#globeGlow)" class="globe__glow"/>
+            <circle cx="250" cy="250" r="180" fill="url(#globeFill)"/>
+            <g clip-path="url(#globeClip)" class="globe__grid">
+              <ellipse cx="250" cy="250" rx="180" ry="40"/>
+              <ellipse cx="250" cy="250" rx="180" ry="100"/>
+              <ellipse cx="250" cy="250" rx="180" ry="150"/>
+              <line x1="70" y1="250" x2="430" y2="250"/>
+              <g class="globe__meridians">
+                <ellipse cx="250" cy="250" rx="40" ry="180"/>
+                <ellipse cx="250" cy="250" rx="100" ry="180"/>
+                <ellipse cx="250" cy="250" rx="150" ry="180"/>
+                <line x1="250" y1="70" x2="250" y2="430"/>
+              </g>
+            </g>
+            <circle cx="250" cy="250" r="180" class="globe__rim"/>
+            <!-- routes -->
+            <path class="globe__route" d="M170 190 Q 250 110 340 175"/>
+            <path class="globe__route" d="M340 175 Q 380 250 330 320"/>
+            <path class="globe__route" d="M170 190 Q 190 290 260 340"/>
+            <path class="globe__route" d="M260 340 Q 300 350 330 320"/>
+            <!-- hubs -->
+            <g class="globe__pin"><circle cx="170" cy="190" r="5"/><circle cx="170" cy="190" r="12" class="globe__ping"/><text x="152" y="180" text-anchor="end">Hamburg</text></g>
+            <g class="globe__pin"><circle cx="340" cy="175" r="5"/><circle cx="340" cy="175" r="12" class="globe__ping"/><text x="352" y="166">Shanghai</text></g>
+            <g class="globe__pin"><circle cx="330" cy="320" r="5"/><circle cx="330" cy="320" r="12" class="globe__ping"/><text x="344" y="334">Sydney</text></g>
+            <g class="globe__pin"><circle cx="260" cy="340" r="5"/><circle cx="260" cy="340" r="12" class="globe__ping"/><text x="244" y="362" text-anchor="end">Singapore</text></g>
+            <circle r="4" class="globe__parcel"><animateMotion dur="5s" repeatCount="indefinite" path="M170 190 Q 250 110 340 175"/></circle>
+            <circle r="4" class="globe__parcel"><animateMotion dur="6s" repeatCount="indefinite" path="M340 175 Q 380 250 330 320"/></circle>
           </svg>
-          <div class="hero__ticker" data-ticker>
-            <span class="hero__ticker-label">Now routing via</span>
-            <span class="hero__ticker-city" data-ticker-city>Sydney</span>
-          </div>
+          <p class="hero__routing"><span>Routing via</span> <b data-ticker-city>Sydney</b></p>
         </div>
       </div>
 
-      <!-- Service marquee -->
-      <div class="marquee" aria-hidden="true">
-        <div class="marquee__track">
-          <span>Air freight</span><span>Ocean freight</span><span>Customs brokerage</span><span>Warehousing &amp; 3PL</span><span>Project cargo</span><span>Road &amp; linehaul</span>
-          <span>Air freight</span><span>Ocean freight</span><span>Customs brokerage</span><span>Warehousing &amp; 3PL</span><span>Project cargo</span><span>Road &amp; linehaul</span>
+      <!-- Service strip -->
+      <div class="strip" aria-hidden="true">
+        <div class="strip__track">
+          <span>Air freight</span><span>Ocean freight</span><span>Customs brokerage</span><span>Warehousing &amp; 3PL</span><span>Project cargo</span><span>Domestic &amp; linehaul</span>
+          <span>Air freight</span><span>Ocean freight</span><span>Customs brokerage</span><span>Warehousing &amp; 3PL</span><span>Project cargo</span><span>Domestic &amp; linehaul</span>
         </div>
       </div>
     </section>
 
-    <!-- ========== ABOUT + STATS ========== -->
-    <section class="section about" id="about">
+    <!-- ========== ABOUT: illustration + text (light) ========== -->
+    <section class="section section--light about" id="about">
       <div class="container about__grid">
-        <div>
-          <p class="eyebrow reveal">About us</p>
-          <h2 class="h2 reveal">Small enough to care, big enough to deliver.</h2>
+        <div class="about__art reveal" aria-hidden="true">
+          <!-- Highway illustration: original SVG -->
+          <svg viewBox="0 0 600 460" class="highway">
+            <defs>
+              <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9fd3f0"/><stop offset="1" stop-color="#eef7fc"/></linearGradient>
+              <linearGradient id="road" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#55595f"/><stop offset="1" stop-color="#2b2e33"/></linearGradient>
+            </defs>
+            <rect width="600" height="460" fill="url(#sky)"/>
+            <path d="M0 210 C 120 170, 220 190, 300 180 C 400 170, 480 150, 600 180 V460 H0Z" fill="#5f9b5a"/>
+            <path d="M0 240 C 150 220, 260 230, 600 215 V460 H0Z" fill="#3f7d45"/>
+            <g fill="#2f6b38">
+              <circle cx="60" cy="230" r="34"/><circle cx="110" cy="220" r="26"/><circle cx="520" cy="210" r="32"/><circle cx="565" cy="222" r="24"/>
+              <circle cx="20" cy="300" r="44"/><circle cx="585" cy="300" r="46"/>
+            </g>
+            <path d="M282 200 L318 200 L560 460 L40 460 Z" fill="url(#road)"/>
+            <g class="highway__dash" stroke="#f4f4f4" stroke-width="4" stroke-dasharray="14 18">
+              <line x1="295" y1="205" x2="200" y2="460"/>
+              <line x1="305" y1="205" x2="400" y2="460"/>
+            </g>
+            <!-- little trucks -->
+            <g class="highway__truck highway__truck--a"><rect x="-14" y="-10" width="28" height="20" rx="2" fill="#fff"/><rect x="-10" y="10" width="20" height="6" fill="#ff6b00"/></g>
+            <g class="highway__truck highway__truck--b"><rect x="-10" y="-7" width="20" height="14" rx="2" fill="#1e90ff"/><rect x="-7" y="7" width="14" height="4" fill="#fff"/></g>
+          </svg>
         </div>
         <div class="about__body">
-          <p class="reveal">Placeholder story: tell visitors who you are, where you started and what kind of shippers you serve best. Two or three short paragraphs work well here.</p>
-          <p class="reveal">Keep it concrete: the lanes you know well, the size of your team and the one thing customers mention most often.</p>
-          <a href="#contact" class="link-arrow reveal">Read our story</a>
+          <p class="label label--dark reveal">About us</p>
+          <h2 class="h2 reveal">Fewer handovers. <span class="muted">Fewer surprises.</span></h2>
+          <p class="reveal">Placeholder story: who you are, where you started and which shippers you serve best. Two or three short paragraphs work well here.</p>
+          <p class="reveal">Keep it concrete: the lanes you know, the size of your team and the one thing customers mention most.</p>
+          <a href="#contact" class="btn btn--outline-dark reveal">Read our story</a>
         </div>
       </div>
+    </section>
 
+    <!-- ========== STATEMENT: words fill in on scroll ========== -->
+    <section class="section section--light statement" data-statement>
       <div class="container">
-        <p class="stats__caption reveal">By the numbers (placeholder figures)</p>
+        <p class="label label--dark">Our promise</p>
+        <h2 class="statement__text" data-fill-text>Steady at every handover, honest about every delay, and on the phone when it matters.</h2>
+      </div>
+    </section>
+
+    <!-- ========== STATS (light) ========== -->
+    <section class="section section--light stats-section">
+      <div class="container">
+        <p class="label label--dark reveal">Placeholder figures</p>
         <ul class="stats" role="list">
           <li class="stat reveal">
             <span class="stat__value"><span data-count-to="1200">0</span>+</span>
@@ -123,7 +192,7 @@
           </li>
           <li class="stat reveal">
             <span class="stat__value"><span data-count-to="97.5" data-decimals="1">0</span>%</span>
-            <span class="stat__label">Arrive within the quoted window</span>
+            <span class="stat__label">Arrive in the quoted window</span>
           </li>
           <li class="stat reveal">
             <span class="stat__value"><span data-count-to="40">0</span>+</span>
@@ -133,27 +202,25 @@
       </div>
     </section>
 
-    <!-- ========== SCROLL SCENE: truck drives as you scroll ========== -->
+    <!-- ========== ROAD SCENE: truck drives as you scroll ========== -->
     <section class="road" aria-label="Animated delivery truck" data-road>
       <div class="road__sticky">
+        <div class="stars stars--faint" aria-hidden="true"></div>
         <div class="road__speed" aria-hidden="true">
           <span class="road__speed-value" data-speed>00</span>
           <span class="road__speed-unit">km/h</span>
         </div>
         <svg class="truck" viewBox="0 0 360 140" data-truck aria-hidden="true">
-          <!-- trailer / container -->
-          <rect x="10" y="20" width="220" height="86" rx="6" class="truck__box"/>
+          <rect x="10" y="20" width="220" height="86" rx="3" class="truck__box"/>
           <g class="truck__ribs">
             <line x1="40" y1="28" x2="40" y2="98"/><line x1="70" y1="28" x2="70" y2="98"/>
             <line x1="100" y1="28" x2="100" y2="98"/><line x1="130" y1="28" x2="130" y2="98"/>
             <line x1="160" y1="28" x2="160" y2="98"/><line x1="190" y1="28" x2="190" y2="98"/>
           </g>
           <text x="120" y="70" class="truck__label" text-anchor="middle">NORTHWIND</text>
-          <!-- cab -->
           <path d="M238 44 h58 l36 30 v32 h-94 z" class="truck__cab"/>
           <path d="M252 52 h38 l24 22 h-62 z" class="truck__window"/>
           <rect x="228" y="100" width="110" height="8" class="truck__chassis"/>
-          <!-- wheels -->
           <g class="wheel" data-wheel><circle cx="60" cy="112" r="16"/><circle cx="60" cy="112" r="6" class="wheel__hub"/><line x1="60" y1="98" x2="60" y2="126" class="wheel__spoke"/></g>
           <g class="wheel" data-wheel><circle cx="100" cy="112" r="16"/><circle cx="100" cy="112" r="6" class="wheel__hub"/><line x1="100" y1="98" x2="100" y2="126" class="wheel__spoke"/></g>
           <g class="wheel" data-wheel><circle cx="300" cy="112" r="16"/><circle cx="300" cy="112" r="6" class="wheel__hub"/><line x1="300" y1="98" x2="300" y2="126" class="wheel__spoke"/></g>
@@ -162,102 +229,91 @@
       </div>
     </section>
 
-    <!-- ========== SERVICES ========== -->
-    <section class="section services" id="services">
-      <div class="container">
-        <div class="section-head">
-          <p class="eyebrow reveal">Our services</p>
-          <h2 class="h2 reveal">Six ways we keep goods moving.</h2>
-          <p class="section-head__lead reveal">Pick a single service or combine several. Each card is a placeholder; swap in your own descriptions and link through to detail pages.</p>
+    <!-- ========== SERVICES (dark list with blur reveal) ========== -->
+    <section class="section section--dark services" id="services">
+      <div class="container services__grid">
+        <div class="services__intro">
+          <p class="label reveal">Our services</p>
+          <h2 class="h2 reveal">Six services, one desk.</h2>
+          <p class="muted-light reveal">Book one service or chain several together. Each line below is placeholder copy to replace with your own.</p>
         </div>
-
-        <ul class="cards" role="list">
-          <li class="card reveal">
-            <svg class="card__icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M6 28l14-4 10-16 4 2-5 13 11-3 4-6 3 1-3 10-30 9z"/></svg>
-            <h3 class="card__title">Air freight</h3>
-            <p>Time-critical consignments booked on the next suitable flight, with door pickup and delivery available.</p>
+        <ol class="service-list">
+          <li class="service blur-in">
+            <span class="service__num">01</span>
+            <svg class="service__icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M6 28l14-4 10-16 4 2-5 13 11-3 4-6 3 1-3 10-30 9z"/></svg>
+            <div><h3>Air freight</h3><p>Time-critical consignments on the next suitable flight, with door pickup and delivery.</p></div>
           </li>
-          <li class="card reveal">
-            <svg class="card__icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M6 30h36l-5 9H11zM12 30V20h10v10M24 30V14h10v16"/><path d="M4 43c4 0 4-2 8-2s4 2 8 2 4-2 8-2 4 2 8 2 4-2 8-2"/></svg>
-            <h3 class="card__title">Ocean freight</h3>
-            <p>Whole or shared containers on weekly sailings, plus reefer and flat-rack bookings for unusual loads.</p>
+          <li class="service blur-in">
+            <span class="service__num">02</span>
+            <svg class="service__icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M6 30h36l-5 9H11zM12 30V20h10v10M24 30V14h10v16"/><path d="M4 43c4 0 4-2 8-2s4 2 8 2 4-2 8-2 4 2 8 2 4-2 8-2"/></svg>
+            <div><h3>Ocean freight</h3><p>Whole or shared containers on weekly sailings, plus reefer and flat-rack bookings.</p></div>
           </li>
-          <li class="card reveal">
-            <svg class="card__icon" viewBox="0 0 48 48" aria-hidden="true"><rect x="10" y="6" width="28" height="36" rx="3"/><path d="M16 16h16M16 23h16M16 30h9"/><path d="M28 34l3 3 6-7"/></svg>
-            <h3 class="card__title">Customs brokerage</h3>
-            <p>Tariff codes, duty estimates and paperwork lodged for you, so goods clear the border without drama.</p>
+          <li class="service blur-in">
+            <span class="service__num">03</span>
+            <svg class="service__icon" viewBox="0 0 48 48" aria-hidden="true"><rect x="10" y="6" width="28" height="36" rx="3"/><path d="M16 16h16M16 23h16M16 30h9"/><path d="M28 34l3 3 6-7"/></svg>
+            <div><h3>Customs brokerage</h3><p>Tariff codes, duty estimates and paperwork lodged for you so goods clear without drama.</p></div>
           </li>
-          <li class="card reveal">
-            <svg class="card__icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M4 20L24 8l20 12v22H4z"/><rect x="14" y="26" width="9" height="8"/><rect x="25" y="26" width="9" height="8"/><rect x="19.5" y="18" width="9" height="8"/></svg>
-            <h3 class="card__title">Warehousing &amp; 3PL</h3>
-            <p>Short or long-term storage with stock reporting, order fulfilment and returns handling.</p>
+          <li class="service blur-in">
+            <span class="service__num">04</span>
+            <svg class="service__icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M4 20L24 8l20 12v22H4z"/><rect x="14" y="26" width="9" height="8"/><rect x="25" y="26" width="9" height="8"/><rect x="19.5" y="18" width="9" height="8"/></svg>
+            <div><h3>Warehousing &amp; 3PL</h3><p>Short or long-term storage with stock reporting, fulfilment and returns handling.</p></div>
           </li>
-          <li class="card reveal">
-            <svg class="card__icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M10 42V8h4l20 8M14 12h22v6M30 18v10"/><rect x="24" y="28" width="12" height="9"/><path d="M6 42h36"/></svg>
-            <h3 class="card__title">Project cargo</h3>
-            <p>Machinery, modules and heavy lifts planned step by step, including permits and escorts.</p>
+          <li class="service blur-in">
+            <span class="service__num">05</span>
+            <svg class="service__icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M10 42V8h4l20 8M14 12h22v6M30 18v10"/><rect x="24" y="28" width="12" height="9"/><path d="M6 42h36"/></svg>
+            <div><h3>Project cargo</h3><p>Machinery, modules and heavy lifts planned step by step, including permits and escorts.</p></div>
           </li>
-          <li class="card reveal">
-            <svg class="card__icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M4 12h24v20H4zM28 18h9l7 7v7H28z"/><circle cx="12" cy="35" r="4"/><circle cx="36" cy="35" r="4"/></svg>
-            <h3 class="card__title">Road &amp; linehaul</h3>
-            <p>Same-day city runs through to long-distance trucking, with photo proof of delivery.</p>
+          <li class="service blur-in">
+            <span class="service__num">06</span>
+            <svg class="service__icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M4 12h24v20H4zM28 18h9l7 7v7H28z"/><circle cx="12" cy="35" r="4"/><circle cx="36" cy="35" r="4"/></svg>
+            <div><h3>Domestic &amp; linehaul</h3><p>Same-day city runs through to long-distance trucking, with photo proof of delivery.</p></div>
           </li>
-        </ul>
+        </ol>
       </div>
-    </section>
 
-    <!-- ========== RELIABILITY (dark band) ========== -->
-    <section class="section section--dark reliability">
       <div class="container">
-        <div class="section-head section-head--split">
-          <h2 class="h2 reveal">What you can count on</h2>
-          <p class="section-head__lead reveal">Three promises to make on every booking. Replace them with whatever your team does best.</p>
-        </div>
         <ul class="features" role="list">
           <li class="feature reveal">
-            <span class="feature__num">01</span>
-            <h3>Status updates you don't have to chase</h3>
-            <p>Automatic emails at pickup, departure, arrival and delivery, plus an online portal.</p>
+            <svg class="feature__icon" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="20" r="8"/><path d="M24 44s-14-12-14-24a14 14 0 0 1 28 0c0 12-14 24-14 24z"/></svg>
+            <h3>Live tracking</h3><p>Status at pickup, departure, arrival and delivery, without chasing anyone.</p>
           </li>
           <li class="feature reveal">
-            <span class="feature__num">02</span>
-            <h3>Agents where you need them</h3>
-            <p>Vetted partners at origin and destination who speak the local language and know the local rules.</p>
+            <svg class="feature__icon" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="18"/><path d="M6 24h36M24 6c6 6 6 30 0 36M24 6c-6 6-6 30 0 36"/></svg>
+            <h3>Partner network</h3><p>Vetted agents at origin and destination who know the local rules.</p>
           </li>
           <li class="feature reveal">
-            <span class="feature__num">03</span>
-            <h3>A named contact</h3>
-            <p>One coordinator follows your shipment from booking to invoice.</p>
+            <svg class="feature__icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M10 26v-4a14 14 0 0 1 28 0v4"/><rect x="6" y="26" width="8" height="12" rx="2"/><rect x="34" y="26" width="8" height="12" rx="2"/></svg>
+            <h3>Round-the-clock support</h3><p>A named coordinator follows your shipment from booking to invoice.</p>
           </li>
         </ul>
       </div>
     </section>
 
-    <!-- ========== WHY US ========== -->
-    <section class="section why" id="why-us">
+    <!-- ========== WHY US (light) ========== -->
+    <section class="section section--light why" id="why-us">
       <div class="container why__grid">
         <div class="why__intro">
-          <p class="eyebrow reveal">Why us</p>
-          <h2 class="h2 reveal">Five reasons shippers stay with us.</h2>
-          <a href="#contact" class="btn btn--accent reveal">Get a quote</a>
+          <p class="label label--dark reveal">Why us</p>
+          <h2 class="h2 reveal">Five reasons shippers stay.</h2>
+          <a href="#contact" class="btn btn--dark reveal">Get a quote</a>
         </div>
         <ol class="why__list">
           <li class="reveal"><h3>Quotes the same day</h3><p>Send dimensions and dates in the morning, get a firm price by the afternoon.</p></li>
           <li class="reveal"><h3>Plain-English paperwork</h3><p>We explain what each document is for and fill in as much as we can.</p></li>
-          <li class="reveal"><h3>Flexible routing</h3><p>When a port is congested we suggest alternatives before it becomes your problem.</p></li>
+          <li class="reveal"><h3>Flexible routing</h3><p>When a port backs up, we suggest alternatives before it becomes your problem.</p></li>
           <li class="reveal"><h3>Itemised invoices</h3><p>Every charge listed line by line, matching the quote you approved.</p></li>
           <li class="reveal"><h3>Insurance made easy</h3><p>Cargo cover offered with every booking, priced up front.</p></li>
         </ol>
       </div>
     </section>
 
-    <!-- ========== TESTIMONIALS (placeholder quotes) ========== -->
-    <section class="section section--tint testimonials" aria-labelledby="testimonials-title">
+    <!-- ========== TESTIMONIALS (light, placeholder) ========== -->
+    <section class="section section--light testimonials" aria-labelledby="testimonials-title">
       <div class="container">
         <div class="section-head">
-          <p class="eyebrow reveal">Testimonials</p>
+          <p class="label label--dark reveal">Testimonials</p>
           <h2 class="h2 reveal" id="testimonials-title">What customers say</h2>
-          <p class="section-head__lead reveal">Placeholder quotes. Replace them with real customer feedback before going live.</p>
+          <p class="muted reveal">Placeholder quotes. Replace with real, permissioned customer feedback before going live.</p>
         </div>
 
         <div class="slider" data-slider>
@@ -265,15 +321,15 @@
             <ul class="slider__track" role="list" data-slider-track>
               <li class="quote" data-slide>
                 <blockquote>“Placeholder quote. Use a short, specific line from a real customer about a problem you solved.”</blockquote>
-                <p class="quote__by"><span class="avatar" aria-hidden="true">CA</span><span><strong>Customer A</strong><br>Operations Director, Retail</span></p>
+                <p class="quote__by"><span class="avatar" aria-hidden="true">CA</span><span><strong>Customer A</strong><br>Operations Director at Retail Co.</span></p>
               </li>
               <li class="quote" data-slide>
                 <blockquote>“Placeholder quote. Mention a measurable result, such as days saved or costs reduced.”</blockquote>
-                <p class="quote__by"><span class="avatar" aria-hidden="true">CB</span><span><strong>Customer B</strong><br>Supply Chain Lead, Technology</span></p>
+                <p class="quote__by"><span class="avatar" aria-hidden="true">CB</span><span><strong>Customer B</strong><br>Supply Chain Lead at Tech Co.</span></p>
               </li>
               <li class="quote" data-slide>
                 <blockquote>“Placeholder quote. Keep it to two sentences so it reads well on mobile.”</blockquote>
-                <p class="quote__by"><span class="avatar" aria-hidden="true">CC</span><span><strong>Customer C</strong><br>Head of Logistics, Fashion</span></p>
+                <p class="quote__by"><span class="avatar" aria-hidden="true">CC</span><span><strong>Customer C</strong><br>Head of Logistics at Fashion Co.</span></p>
               </li>
             </ul>
           </div>
@@ -286,25 +342,36 @@
       </div>
     </section>
 
-    <!-- ========== PARTNERS (placeholder logos) ========== -->
-    <section class="section partners" aria-labelledby="partners-title">
-      <div class="container">
-        <h2 class="eyebrow" id="partners-title">Our carrier partners</h2>
+    <!-- ========== PARTNERS (dark, placeholder logos) ========== -->
+    <section class="section section--dark partners" aria-labelledby="partners-title">
+      <div class="stars stars--faint" aria-hidden="true"></div>
+      <div class="container partners__head">
+        <p class="label">Our partners</p>
+        <h2 class="h3" id="partners-title">Airlines</h2>
       </div>
       <div class="logo-marquee" aria-hidden="true">
         <div class="logo-marquee__track">
-          <span class="logo-chip">Airline 01</span><span class="logo-chip">Shipping Line 01</span><span class="logo-chip">Airline 02</span><span class="logo-chip">Shipping Line 02</span><span class="logo-chip">Airline 03</span><span class="logo-chip">Shipping Line 03</span><span class="logo-chip">Airline 04</span><span class="logo-chip">Shipping Line 04</span>
-          <span class="logo-chip">Airline 01</span><span class="logo-chip">Shipping Line 01</span><span class="logo-chip">Airline 02</span><span class="logo-chip">Shipping Line 02</span><span class="logo-chip">Airline 03</span><span class="logo-chip">Shipping Line 03</span><span class="logo-chip">Airline 04</span><span class="logo-chip">Shipping Line 04</span>
+          <span class="logo-chip">Airline 01</span><span class="logo-chip">Airline 02</span><span class="logo-chip">Airline 03</span><span class="logo-chip">Airline 04</span><span class="logo-chip">Airline 05</span><span class="logo-chip">Airline 06</span>
+          <span class="logo-chip">Airline 01</span><span class="logo-chip">Airline 02</span><span class="logo-chip">Airline 03</span><span class="logo-chip">Airline 04</span><span class="logo-chip">Airline 05</span><span class="logo-chip">Airline 06</span>
+        </div>
+      </div>
+      <div class="container partners__head">
+        <h2 class="h3">Shipping lines</h2>
+      </div>
+      <div class="logo-marquee logo-marquee--reverse" aria-hidden="true">
+        <div class="logo-marquee__track">
+          <span class="logo-chip">Line 01</span><span class="logo-chip">Line 02</span><span class="logo-chip">Line 03</span><span class="logo-chip">Line 04</span><span class="logo-chip">Line 05</span><span class="logo-chip">Line 06</span>
+          <span class="logo-chip">Line 01</span><span class="logo-chip">Line 02</span><span class="logo-chip">Line 03</span><span class="logo-chip">Line 04</span><span class="logo-chip">Line 05</span><span class="logo-chip">Line 06</span>
         </div>
       </div>
     </section>
 
-    <!-- ========== INSIGHTS ========== -->
-    <section class="section insights" id="insights">
+    <!-- ========== INSIGHTS (light) ========== -->
+    <section class="section section--light insights" id="insights">
       <div class="container">
         <div class="section-head section-head--split">
           <h2 class="h2 reveal">Insights <sup class="count">(3)</sup></h2>
-          <a href="#insights" class="link-arrow reveal">View all articles</a>
+          <a href="#insights" class="btn btn--outline-dark reveal">View all</a>
         </div>
         <ul class="posts" role="list">
           <li class="post reveal">
@@ -335,54 +402,34 @@
       </div>
     </section>
 
-    <!-- ========== FAQ ========== -->
-    <section class="section faq" id="faq">
+    <!-- ========== FAQ (light) ========== -->
+    <section class="section section--light faq" id="faq">
       <div class="container faq__grid">
         <div>
-          <p class="eyebrow reveal">FAQ</p>
+          <p class="label label--dark reveal">F.A.Q.</p>
           <h2 class="h2 reveal">Common questions</h2>
-          <p class="reveal">Can't find what you need? Drop us a line.</p>
-          <a href="mailto:hello@example.com" class="btn btn--ghost reveal">Email us</a>
+          <p class="muted reveal">Can't find what you need? Drop us a line.</p>
+          <a href="mailto:hello@example.com" class="btn btn--dark reveal">Email us</a>
         </div>
         <div class="accordion" data-accordion>
-          <details>
-            <summary>What does Northwind Freight do?</summary>
-            <p>We arrange the movement of goods by air, sea and road, and handle the customs and storage steps in between.</p>
-          </details>
-          <details>
-            <summary>Which industries do you work with?</summary>
-            <p>Placeholder answer: list the sectors you know best.</p>
-          </details>
-          <details>
-            <summary>How long does a typical shipment take?</summary>
-            <p>Placeholder answer: give rough transit ranges for your main lanes and modes.</p>
-          </details>
-          <details>
-            <summary>Can you clear my goods through customs?</summary>
-            <p>Placeholder answer: explain what you handle and what the shipper needs to provide.</p>
-          </details>
-          <details>
-            <summary>What affects the price?</summary>
-            <p>Placeholder answer: outline the main cost drivers and how often rates change.</p>
-          </details>
-          <details>
-            <summary>Do you offer cargo insurance?</summary>
-            <p>Placeholder answer: describe cover options and how claims work.</p>
-          </details>
-          <details>
-            <summary>How do I get a quote?</summary>
-            <p>Fill in the form below with what you're sending, where from and where to.</p>
-          </details>
+          <details><summary>What does Northwind Freight do?</summary><p>We arrange the movement of goods by air, sea and road, and handle the customs and storage steps in between.</p></details>
+          <details><summary>Which industries do you work with?</summary><p>Placeholder answer: list the sectors you know best.</p></details>
+          <details><summary>How long does a typical shipment take?</summary><p>Placeholder answer: give rough transit ranges for your main lanes and modes.</p></details>
+          <details><summary>Can you clear my goods through customs?</summary><p>Placeholder answer: explain what you handle and what the shipper needs to provide.</p></details>
+          <details><summary>What affects the price?</summary><p>Placeholder answer: outline the main cost drivers and how often rates change.</p></details>
+          <details><summary>Do you offer cargo insurance?</summary><p>Placeholder answer: describe cover options and how claims work.</p></details>
+          <details><summary>How do I get a quote?</summary><p>Fill in the form below with what you're sending, where from and where to.</p></details>
         </div>
       </div>
     </section>
 
-    <!-- ========== CTA + CONTACT ========== -->
+    <!-- ========== CTA + CONTACT (dark) ========== -->
     <section class="section section--dark cta" id="contact">
+      <div class="stars" aria-hidden="true"></div>
       <div class="container cta__grid">
         <div>
-          <h2 class="h2 cta__title reveal">Let's plan your next shipment.</h2>
-          <p class="reveal">Tell us what you're moving and we'll reply with options and a price.</p>
+          <h2 class="cta__title reveal">Let's plan your next shipment.</h2>
+          <p class="muted-light reveal">Tell us what you're moving and we'll reply with options and a price.</p>
         </div>
         <form class="form reveal" data-form novalidate>
           <div class="form__row">
@@ -392,11 +439,11 @@
           <label>Service
             <select name="service">
               <option>Air freight</option><option>Ocean freight</option><option>Customs brokerage</option>
-              <option>Warehousing &amp; 3PL</option><option>Project cargo</option><option>Road &amp; linehaul</option>
+              <option>Warehousing &amp; 3PL</option><option>Project cargo</option><option>Domestic &amp; linehaul</option>
             </select>
           </label>
           <label>Shipment details<textarea name="message" rows="4" required></textarea></label>
-          <button type="submit" class="btn btn--accent">Send enquiry</button>
+          <button type="submit" class="btn btn--light">Send enquiry</button>
           <p class="form__status" role="status" data-form-status></p>
         </form>
       </div>
@@ -405,30 +452,51 @@
 
   <!-- ========== FOOTER ========== -->
   <footer class="site-footer">
+    <div class="container footer__top">
+      <a href="#top" class="logo" aria-label="Northwind Freight home">
+        <span class="logo__mark" aria-hidden="true"></span>
+        <span class="logo__text">Northwind<b>Freight</b></span>
+      </a>
+      <form class="newsletter" data-newsletter novalidate>
+        <label for="nl-email" class="sr-only">Email for newsletter</label>
+        <input id="nl-email" type="email" placeholder="Your email for updates" required>
+        <button type="submit" class="btn btn--light">Subscribe</button>
+        <p class="newsletter__status" role="status" data-newsletter-status></p>
+      </form>
+    </div>
+
     <div class="container footer__grid">
-      <div class="footer__brand">
-        <a href="#top" class="logo logo--light" aria-label="Northwind Freight home">
-          <span class="logo__mark" aria-hidden="true"></span>
-          <span class="logo__text">Northwind<span>Freight</span></span>
-        </a>
-        <p>Placeholder brand. Replace the name, logo, offices and contact details with your own.</p>
-      </div>
-      <div>
-        <h3 class="footer__h">Company</h3>
-        <ul role="list"><li><a href="#about">About</a></li><li><a href="#services">Services</a></li><li><a href="#insights">Insights</a></li><li><a href="#contact">Careers</a></li></ul>
-      </div>
-      <div>
-        <h3 class="footer__h">Offices</h3>
-        <ul role="list"><li>City One, Country</li><li>City Two, Country</li><li>City Three, Country</li></ul>
+      <div class="tabs" data-tabs>
+        <div class="tabs__list" role="tablist" aria-label="Browse">
+          <button type="button" role="tab" id="tab-ind" aria-controls="panel-ind" aria-selected="true">Industries</button>
+          <button type="button" role="tab" id="tab-svc" aria-controls="panel-svc" aria-selected="false" tabindex="-1">Services</button>
+        </div>
+        <ul role="tabpanel" id="panel-ind" aria-labelledby="tab-ind" class="tabs__panel">
+          <li><a href="#why-us">Retail &amp; e-commerce</a></li><li><a href="#why-us">Food &amp; beverage</a></li><li><a href="#why-us">Industrial</a></li><li><a href="#why-us">Technology</a></li><li><a href="#why-us">Fashion</a></li>
+        </ul>
+        <ul role="tabpanel" id="panel-svc" aria-labelledby="tab-svc" class="tabs__panel" hidden>
+          <li><a href="#services">Air freight</a></li><li><a href="#services">Ocean freight</a></li><li><a href="#services">Customs brokerage</a></li><li><a href="#services">Warehousing &amp; 3PL</a></li><li><a href="#services">Project cargo</a></li><li><a href="#services">Domestic &amp; linehaul</a></li>
+        </ul>
       </div>
       <div>
         <h3 class="footer__h">Contact</h3>
         <ul role="list"><li><a href="mailto:hello@example.com">hello@example.com</a></li><li><a href="tel:+0000000000">+00 0000 0000</a></li></ul>
+        <h3 class="footer__h">Offices</h3>
+        <ul role="list"><li>City One, Country</li><li>City Two, Country</li><li>City Three, Country</li></ul>
+      </div>
+      <div>
+        <h3 class="footer__h">Company</h3>
+        <ul role="list"><li><a href="#about">About</a></li><li><a href="#insights">Insights</a></li><li><a href="#faq">Careers</a></li><li><a href="#contact">Contact</a></li></ul>
+        <h3 class="footer__h">Follow</h3>
+        <ul role="list" class="socials"><li><a href="#top">LinkedIn</a></li><li><a href="#top">Instagram</a></li><li><a href="#top">Facebook</a></li></ul>
       </div>
     </div>
+
+    <div class="footer__wordmark" aria-hidden="true">Northwind</div>
+
     <div class="container footer__bottom">
-      <p>© <span data-year>2026</span> Northwind Freight (placeholder). All rights reserved.</p>
-      <ul role="list" class="footer__legal"><li><a href="#top">Privacy</a></li><li><a href="#top">Terms</a></li></ul>
+      <p>© <span data-year>2026</span> Northwind Freight (placeholder)</p>
+      <ul role="list" class="footer__legal"><li><a href="#top">Quality &amp; safety</a></li><li><a href="#top">Privacy</a></li><li><a href="#top">Terms</a></li><li><a href="#top">Cookies</a></li></ul>
     </div>
   </footer>
 

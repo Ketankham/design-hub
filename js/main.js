@@ -80,7 +80,7 @@
     requestAnimationFrame(step);
   };
 
-  const reveals = $$('.reveal');
+  const reveals = $$('.reveal, .blur-in');
   const counters = $$('[data-count-to]');
   if ('IntersectionObserver' in window) {
     const io = new IntersectionObserver((entries) => {
@@ -148,12 +148,33 @@
     prevProgress = progress;
   };
 
+  /* ---------- Statement: split into words, light them up as the block scrolls past ---------- */
+  const fillText = $('[data-fill-text]');
+  let words = [];
+  if (fillText) {
+    const text = fillText.textContent.trim();
+    fillText.setAttribute('aria-label', text); // screen readers get the sentence, not 20 spans
+    fillText.innerHTML = text.split(/\s+/).map((w) => `<span class="word" aria-hidden="true">${w}</span>`).join(' ');
+    words = $$('.word', fillText);
+  }
+  const onScrollStatement = () => {
+    if (!fillText || reduceMotion) return;
+    const rect = fillText.getBoundingClientRect();
+    const vh = window.innerHeight;
+    // 0 when the block's top reaches 85% of the viewport, 1 when its bottom reaches 40%.
+    const start = vh * 0.85;
+    const end = vh * 0.4;
+    const progress = Math.min(Math.max((start - rect.top) / (start - end + rect.height), 0), 1);
+    const lit = Math.round(progress * words.length);
+    words.forEach((w, i) => w.classList.toggle('is-on', i < lit));
+  };
+
   /* ---------- One rAF-throttled scroll handler ---------- */
   let ticking = false;
   const onScroll = () => {
     if (ticking) return;
     ticking = true;
-    requestAnimationFrame(() => { onScrollHeader(); onScrollRoad(); ticking = false; });
+    requestAnimationFrame(() => { onScrollHeader(); onScrollRoad(); onScrollStatement(); ticking = false; });
   };
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onScroll);
@@ -238,6 +259,49 @@
       // TODO: send to your backend / form service here.
       setStatus('Thanks! This demo form isn’t connected yet, but your enquiry would be on its way.', 'success');
       form.reset();
+    });
+  }
+
+  /* ---------- Footer tabs (Industries / Services), arrow-key friendly ---------- */
+  const tabs = $('[data-tabs]');
+  if (tabs) {
+    const buttons = $$('[role="tab"]', tabs);
+    const select = (btn) => {
+      buttons.forEach((b) => {
+        const on = b === btn;
+        b.setAttribute('aria-selected', String(on));
+        b.tabIndex = on ? 0 : -1;
+        document.getElementById(b.getAttribute('aria-controls')).hidden = !on;
+      });
+    };
+    buttons.forEach((b, i) => {
+      b.addEventListener('click', () => select(b));
+      b.addEventListener('keydown', (e) => {
+        if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+        const next = buttons[(i + (e.key === 'ArrowRight' ? 1 : -1) + buttons.length) % buttons.length];
+        select(next);
+        next.focus();
+      });
+    });
+  }
+
+  /* ---------- Newsletter: validation only (no backend yet) ---------- */
+  const newsletter = $('[data-newsletter]');
+  if (newsletter) {
+    const input = $('input', newsletter);
+    const statusEl = $('[data-newsletter-status]', newsletter);
+    newsletter.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (!input.value.trim() || !input.checkValidity()) {
+        statusEl.textContent = 'Please enter a valid email address.';
+        statusEl.className = 'newsletter__status is-error';
+        input.focus();
+        return;
+      }
+      // TODO: send to your mailing-list provider here.
+      statusEl.textContent = 'Thanks! Demo only: not connected to a mailing list yet.';
+      statusEl.className = 'newsletter__status is-success';
+      newsletter.reset();
     });
   }
 

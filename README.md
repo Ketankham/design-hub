@@ -19,24 +19,29 @@ css/styles.css  Design tokens (:root) + component styles
 js/main.js      Interactions (vanilla JS, no dependencies)
 ```
 
+## Look & feel
+
+Monospace type throughout (JetBrains Mono), uppercase headings, black starfield sections alternating with light (#f5f5f5) sections, orange (#ff6b00) and blue (#1e90ff) accents, 5px button radius. All tokens live at the top of `css/styles.css`.
+
 ## Sections
 
 | # | Section | Behaviour |
 |---|---------|-----------|
-| 1 | Preloader | Counts 00→100 then fades; capped at 3 s; skipped with reduced motion |
-| 2 | Header | Transparent → solid on scroll, hides on scroll down; full-screen mobile menu (Esc closes, scroll locked) |
-| 3 | Hero | Animated SVG route map, rotating "now routing via" city ticker, service marquee |
-| 4 | About + stats | Count-up numbers when scrolled into view (once) |
-| 5 | Road scene | Sticky section; truck drives across as you scroll, wheels spin, km/h readout reflects scroll speed |
-| 6 | Services | 6 cards with hover invert |
-| 7 | Promises | 3 numbered features on a dark band |
-| 8 | Why us | Sticky intro + numbered list |
-| 9 | Testimonials | Slider: buttons, arrow keys, swipe, autoplay that pauses on hover/focus |
-| 10 | Partners | Infinite logo marquee (pauses on hover) |
-| 11 | Insights | 3 article cards |
-| 12 | FAQ | Native `<details>` accordion, one open at a time |
-| 13 | Contact | Form with client-side validation (not wired to a backend) |
-| 14 | Footer | Links, offices, contact, auto year |
+| 1 | Preloader | Dotted map + 00→100 counter, then fades; capped at 3 s; skipped with reduced motion |
+| 2 | Header | News ticker strip + nav; solid on scroll, hides on scroll down; full-screen mobile menu (Esc closes, scroll locked) |
+| 3 | Hero (dark) | Huge uppercase headline, glowing SVG globe with route pins, rotating "routing via" city, service strip |
+| 4 | About (light) | Animated highway illustration + text |
+| 5 | Statement (light) | Words fill from grey to black as you scroll |
+| 6 | Stats (light) | Count-up numbers when scrolled into view (once) |
+| 7 | Road scene (dark) | Sticky; truck drives across on scroll, wheels spin, km/h follows scroll speed |
+| 8 | Services (dark) | Sticky intro + numbered list with blur/tilt reveal; 3 feature cards |
+| 9 | Why us (light) | Sticky intro + numbered list |
+| 10 | Testimonials (light) | Slider: buttons, arrow keys, swipe, autoplay that pauses on hover/focus |
+| 11 | Partners (dark) | Two logo marquees (airlines / shipping lines) in opposite directions |
+| 12 | Insights (light) | 3 article cards |
+| 13 | FAQ (light) | Native `<details>` accordion, one open at a time |
+| 14 | Contact (dark) | Form with client-side validation (not wired to a backend) |
+| 15 | Footer | Newsletter, Industries/Services tabs (arrow keys), contact, offices, socials, giant wordmark, legal |
 
 ## Re-branding checklist
 
@@ -47,7 +52,8 @@ js/main.js      Interactions (vanilla JS, no dependencies)
 - [ ] Partner logos: replace `.logo-chip` placeholders with logos you're licensed to show
 - [ ] Insight thumbnails: replace gradient blocks with images
 - [ ] Hero ticker cities: `cities` array in `js/main.js`
-- [ ] Contact form: hook the `submit` handler in `js/main.js` to your backend or a form service
+- [ ] Contact + newsletter forms: hook the `submit` handlers in `js/main.js` to your backend / mailing list
+- [ ] Ticker headlines in the header
 - [ ] Footer offices, email, phone, legal links
 
 ## Accessibility & edge cases covered
